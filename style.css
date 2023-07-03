@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;  
+body{
+    width:414px;
+    height:736px;
+}
+
+#__plasmo{
+    height:100%;
+}
