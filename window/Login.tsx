@@ -26,11 +26,11 @@ export default function Login() {
     if (user && user?._id) {
       toast.success("You are Login")
       navigate("/")
-    }else if(typeof user == undefined)
-    toast.error("user not found")
-     else {
+    } else if (typeof user == "undefined") {
+      toast.error("user not found")
+    } else {
       // crossOriginIsolated.log()
-      console.log(`user`, user);
+      console.log(`user`, user)
       toast.error("an error occured, pls try again")
     }
   }

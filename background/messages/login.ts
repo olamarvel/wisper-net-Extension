@@ -25,9 +25,10 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
       message: user
     })
   } catch (error) {
-    res.send({ error })
     await storage.set("user", null)
     await storage.set("ids", null)
+    res.send({ error })
+    console.log(`error`, error);
   }
 }
 
