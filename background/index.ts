@@ -26,6 +26,7 @@ function hasIdQueryParam(url: {
 
 async function checkUrl(tab: chrome.tabs.Tab) {
   console.log(`tab`, tab?.url)
+  if(!tab?.url) return
   const { isanAd, id } = hasIdQueryParam({ search: tab.url })
   if (isanAd && id) {
     try {

@@ -16,7 +16,7 @@ export async function engine(id: string): Promise<boolean> {
     const user = await storage.get("user")
     console.log(`user`, user)
 
-    if (!user) throw new Error("No user in local storage")
+    if (!user) throw new Error("No user in local storage"); 
     return await getClicks({ id: user._id, adsId: id })
   } catch (error) {
     console.error(`error`, error)
@@ -88,5 +88,5 @@ async function updateStat(response_id: string, adsId: string, id: string) {
 async function updateUserInStorage(user) {
   await storage.set("user", user)
   await storage.set("ids", user?.userStat?.ids)
-  await storage.set("clicks", user?.userStat?.clicks)
+  await storage.set("clicks", user?.userStat?.ids?.length || 0)
 }
