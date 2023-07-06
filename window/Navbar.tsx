@@ -52,15 +52,16 @@ export default function MyNavbar({ newTab }) {
         variant="small"
         color="blue-gray"
         className="p-1 font-normal">
-        {newTab ? (
-          <Link to={"/signup"} className="flex items-center">
-            Sign Up
-          </Link>
-        ) : (
+        {
+          // newTab ? (
+          //   <Link to={"/signup"} className="flex items-center">
+          //     Sign Up
+          //   </Link>
+          // ) :
           <Link to="/login" className="flex items-center">
             Login
           </Link>
-        )}
+        }
       </Typography>
     </ul>
   )
