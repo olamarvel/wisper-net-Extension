@@ -12,26 +12,28 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 export default function Login() {
   const [username, setusername] = useState("")
-  const [Password, setPassword] = useState("")
+  const [password, setPassword] = useState("")
   const [teamLead, setteamLead] = useState("")
   const Bclass =
     "bg-my-indigo grow text-center rounded-lg p-3 text-lg t cursor-pointer "
   const navigate = useNavigate()
   const handleLogin = async () => {
-    const { message: user } = await sendToBackground({
+    const {
+      message: { token, click, message }
+    } = await sendToBackground({ 
       name: "login",
-      body: { username, Password, teamLead }
+      body: { username, password, teamLead }
     })
-    console.log(user)
-    if (user && user?._id) {
-      toast.success("You are Login")
+    console.log(token)
+    if (token) {
+      toast.success(message)
       navigate("/")
-    } else if (typeof user == "undefined") {
-      toast.error("user not found")
+    } else if (typeof token == "undefined") {
+      toast.error(message)
     } else {
       // crossOriginIsolated.log()
-      console.log(`user`, user)
-      toast.error("an error occured, pls try again")
+      console.log(`token`, token)
+      toast.error("an error occured, pls try again: ->" + message) 
     }
   }
   return (
@@ -56,7 +58,7 @@ export default function Login() {
             color="white"
             className="shadow-none w-full"
             id="Password"
-            value={Password}
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
@@ -77,7 +79,7 @@ export default function Login() {
       <div className="flex  flex-col w-full bg-red grow">
         <div className="absolute w-full bg-red flex gap-2 p-2  bottom-2 left">
           <div
-            className={Bclass + "text-white shadow"}
+            className={Bclass + "text-white shadow"} 
             onClick={() => handleLogin()}>
             LOGIN
           </div>
