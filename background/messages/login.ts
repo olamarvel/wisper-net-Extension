@@ -1,34 +1,31 @@
+import { error } from "console"
+
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 import { Storage } from "@plasmohq/storage"
 
-import client from "../../sanity"
-import { notify } from "~utils"
-import { error } from "console"
+import { login, stats } from "~utils/request"
 
 const storage = new Storage({ area: "local" })
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   try {
-    const [user] =
-      await client.fetch(`*[_type == "user" && username=="${req.body.username}" && password=="${req.body.Password}" && teamlead->id == "${req.body.teamLead}"]{
-        _id,
-        teamlead -> ,
-        userStat[0] ->,
-        admin,
-        username
-    }`)
+    console.log("loginin", req.body)
+    const { token, message, click } = await login({ ...req.body })
+    console.log(token, message, click)
+    const {totalClicks} = await stats(token)
     // !user && error('not registered')
-    await storage.set("user", user)
-    console.log(`user.userStat.ids`, user?.userStat?.ids)
-    await storage.set("ids", user?.userStat?.ids)
+    
+    await storage.set("token", token)
+    await storage.set("click", totalClicks)
+
     res.send({
-      message: user
+      message: { token, message, totalClicks }
     })
   } catch (error) {
-    await storage.set("user", null)
-    await storage.set("ids", null)
+    await storage.set("token", null)
+    await storage.set("click", 0)
     res.send({ error })
-    console.log(`error`, error);
+    console.log(`error`, error)
   }
 }
 

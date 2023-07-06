@@ -7,11 +7,11 @@ export default function Home() {
   const Bclass =
     "bg-my-indigo grow text-center rounded-lg p-3 text-lg t cursor-pointer "
   const [click] = useStorage({
-    key: "clicks",
+    key: "click",
     instance: new Storage({ area: "local" })
   })
-  const [user] = useStorage({
-    key: "user",
+  const [token] = useStorage({
+    key: "token",
     instance: new Storage({
       area: "local"
     })
@@ -28,7 +28,7 @@ export default function Home() {
             <span>Total clicks of</span>
             <span className="text-6xl"> {click}</span>
           </>
-        ) : user ? (
+        ) : token ? (
           <span className="text-6xl">no Clicks yet</span>
         ) : (
           <span className="text-6xl">Pls login</span>

@@ -3,10 +3,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 
 import "~newtab/index.css"
+import Login from "~window/Login"
 
 import MyNavbar from "~window/Navbar"
 import SignUp from "~window/Signup"
 import Home from "~window/home"
+
+import "react-toastify/dist/ReactToastify.css"
 
 function IndexNewtab() {
   const [data, setData] = useState("")
@@ -33,7 +36,7 @@ function IndexNewtab() {
                   theme="light"
                 />
                 <Routes>
-                  <Route path="/signup" Component={() => <SignUp />} />
+                  <Route path="/login" Component={() => <Login />} />
                   <Route index path="*" Component={() => <Home />} />
                 </Routes>
               </div>

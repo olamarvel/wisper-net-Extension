@@ -20,7 +20,7 @@ export const watchOverlayAnchor: PlasmoWatchOverlayAnchor = (
 
 function IndexContent() {
   const [click] = useStorage({
-    key: "clicks",
+    key: "click",
     instance: new Storage({ area: "local" })
   })
   console.log(`click`, click)
@@ -39,7 +39,7 @@ function IndexContent() {
       Today's clicks = {click || 0}
       {click > 1 ? "clicks" : "click"}
     </div> 
-  )
+  ) 
 }
 
 export const getStyle = () => {
