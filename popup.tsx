@@ -20,19 +20,6 @@ import MyNavbar from "~window/Navbar"
 import Home from "~window/home"
 
 function IndexPopup() {
-  const [data, setData] = useState("")
-  const [user] = useStorage({
-    key: "hailing",
-    instance: new Storage({
-      area: "local"
-    })
-  })
-  const navigate = useNavigate()
-  // useEffect(() => {
-  //   console.log(user)
-  //   if (!user) navigate("/")
-  // }, [user])
- 
   return (
     <div className="App h-full py-6 px-6 bg-my-indigo flex flex-col">
       <MyNavbar newTab={false} />
@@ -45,7 +32,7 @@ function IndexPopup() {
           closeOnClick
           rtl={false}
           pauseOnFocusLoss
-          draggable
+          draggable 
           pauseOnHover
           theme="light"
         />

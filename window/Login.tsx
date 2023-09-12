@@ -12,27 +12,33 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 export default function Login() {
   const [username, setusername] = useState("")
-  const [Password, setPassword] = useState("")
-  const [teamLead, setteamLead] = useState("")
+  const [loading, setLoading] = useState(false)
+  // const [password, setPassword] = useState("")
+  // const [teamLead, setteamLead] = useState("")
   const Bclass =
     "bg-my-indigo grow text-center rounded-lg p-3 text-lg t cursor-pointer "
   const navigate = useNavigate()
   const handleLogin = async () => {
-    const { message: user } = await sendToBackground({
+    setLoading(true)
+    const {
+      message: { token, click, message }
+    } = await sendToBackground({
       name: "login",
-      body: { username, Password, teamLead }
+      body: { username } //password, teamLead }
     })
-    console.log(user)
-    if (user && user?._id) {
-      toast.success("You are Login")
+    // console.log(token)
+    if (token) {
+      toast.success(message)
       navigate("/")
-    } else if (typeof user == "undefined") {
-      toast.error("user not found")
+    } else if (typeof token == "undefined") {
+      toast.error(message)
     } else {
       // crossOriginIsolated.log()
-      console.log(`user`, user)
-      toast.error("an error occured, pls try again")
+      // console.log(`token`, token)
+      toast.error("an error occured, pls try again: ->" + message)
     }
+    setLoading(false)
+
   }
   return (
     <>
@@ -50,13 +56,13 @@ export default function Login() {
             onChange={(e) => setusername(e.target.value)}
             type="text"
           />
-          <Input
+          {/* <Input
             variant="standard"
             label="Password"
             color="white"
             className="shadow-none w-full"
             id="Password"
-            value={Password}
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
@@ -69,9 +75,13 @@ export default function Login() {
             value={teamLead}
             onChange={(e) => setteamLead(e.target.value)}
             type="text"
-          />
+          /> */}
         </div>
-        <p className="text">Welcome to wisperNet kindly login</p>
+        {loading ? (
+          <p>wait while we log you in</p>
+        ) : (
+          <p className="text">Welcome to wisperNet kindly login</p>
+        )}
         {/* <p className='text-lg'> </p> */}
       </div>
       <div className="flex  flex-col w-full bg-red grow">

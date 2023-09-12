@@ -18,7 +18,7 @@ const Settings = () => {
   )
   const dispatch = useDispatch()
   useEffect(() => {
-    console.log(user)
+    // console.log(user)
     if (!user) navigate("/")
   }, [user, navigate])
 

@@ -33,12 +33,12 @@ export default function SignUp() {
       toast.error("user is not an admin")
       return
     }
-    console.log('creatng');
+    // console.log('creatng');
     const { message,sucess } = await sendToBackground({
       name: "signup",
       body: { username, password,admin:user.username  }
     })
-    console.log(message)
+    // console.log(message)
     if (message && sucess) {
       toast.success("The user is created")
       navigate('/')
