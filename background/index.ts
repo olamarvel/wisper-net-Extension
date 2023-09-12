@@ -1,8 +1,9 @@
 import "@plasmohq/messaging/background"
 
 import { engine } from "../utils/Clicks"
+import { sendToContentScript } from "@plasmohq/messaging"
 
-export const life = 47
+export const life = 'olamarvel'
 console.log(`WELCOME - ${life}`)
 
 function hasIdQueryParam(url: {
@@ -12,8 +13,9 @@ function hasIdQueryParam(url: {
   if (typeof url.search !== "string") {
     throw new Error("url.search must be a string")
   }
-
+  // debugger
   const params = new URLSearchParams(url.search)
+  // console.log(params)
   const gclid = params.get("gclid")
   const dclid = params.get("dclid")
 
@@ -25,18 +27,21 @@ function hasIdQueryParam(url: {
 }
 
 async function checkUrl(tab: chrome.tabs.Tab) {
-  console.log(`tab`, tab?.url)
-  if(!tab?.url) return
-  const { isanAd, id } = hasIdQueryParam({ search: tab.url })
+  // console.log(`tab`, tab?.url)
+
+  if (!tab?.url) return
+  const { isanAd, id } = hasIdQueryParam({ search: tab.url.split("?")[1] })
+  // console.log(isanAd,id,)
   if (isanAd && id) {
     try {
       const result = await engine(id)
-      console.log(result)
+
+      sendToContentScript({ name: "notification", body: result.message })
     } catch (error) {
       console.error("Error calling engine:", error)
     }
   } else {
-    console.log("not an ads")
+    console.log("not an ads") 
   }
 }
 

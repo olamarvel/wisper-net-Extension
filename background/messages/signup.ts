@@ -9,7 +9,7 @@ const storage = new Storage({area:"local"})
 const handler: PlasmoMessaging.MessageHandler = async (req, res): Promise<void> => {
   try {
 const {username,admin,password} = req.body
-console.log('hello');
+// console.log('hello');
 
    const message = await createUser(username,password,admin)
     res.send({

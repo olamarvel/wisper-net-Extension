@@ -2,12 +2,18 @@
 
 import { Storage } from "@plasmohq/storage"
 import { useStorage } from "@plasmohq/storage/hook"
+import { useEffect } from "react"
+import { isToday } from "~utils"
 
 export default function Home() {
   const Bclass =
     "bg-my-indigo grow text-center rounded-lg p-3 text-lg t cursor-pointer "
-  const [click] = useStorage({
+  const [click,setClick] = useStorage({
     key: "click",
+    instance: new Storage({ area: "local" })
+  })
+  const [clickDate] = useStorage({
+    key: "clickDate",
     instance: new Storage({ area: "local" })
   })
   const [token] = useStorage({
@@ -16,6 +22,21 @@ export default function Home() {
       area: "local"
     })
   })
+  const [username] = useStorage({
+    key: "username",
+    instance: new Storage({
+      area: "local"
+    })
+  })
+ 
+  useEffect(() => {
+  
+    // console.log(`clickDate`, clickDate)
+    if(clickDate && !isToday(clickDate) ){
+      setClick(0)
+    }
+  }, [clickDate])
+  
 
   return (
     <>
@@ -23,11 +44,11 @@ export default function Home() {
         className="mx-2  bg-my-indigo text-white h-60 rounded-b-lg p-2 text-xl flex 
  justify-center items-center 
  flex-col relative">
-        {click ? (
+        {click && username ? (
           <>
-            <span>Total clicks of</span>
+            <span>Welcome {username}: Total Clicks of</span>
             <span className="text-6xl"> {click}</span>
-          </>
+          </> 
         ) : token ? (
           <span className="text-6xl">no Clicks yet</span>
         ) : (

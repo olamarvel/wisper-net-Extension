@@ -12,19 +12,21 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 export default function Login() {
   const [username, setusername] = useState("")
-  const [password, setPassword] = useState("")
-  const [teamLead, setteamLead] = useState("")
+  const [loading, setLoading] = useState(false)
+  // const [password, setPassword] = useState("")
+  // const [teamLead, setteamLead] = useState("")
   const Bclass =
     "bg-my-indigo grow text-center rounded-lg p-3 text-lg t cursor-pointer "
   const navigate = useNavigate()
   const handleLogin = async () => {
+    setLoading(true)
     const {
       message: { token, click, message }
-    } = await sendToBackground({ 
+    } = await sendToBackground({
       name: "login",
-      body: { username, password, teamLead }
+      body: { username } //password, teamLead }
     })
-    console.log(token)
+    // console.log(token)
     if (token) {
       toast.success(message)
       navigate("/")
@@ -32,9 +34,11 @@ export default function Login() {
       toast.error(message)
     } else {
       // crossOriginIsolated.log()
-      console.log(`token`, token)
-      toast.error("an error occured, pls try again: ->" + message) 
+      // console.log(`token`, token)
+      toast.error("an error occured, pls try again: ->" + message)
     }
+    setLoading(false)
+
   }
   return (
     <>
@@ -52,7 +56,7 @@ export default function Login() {
             onChange={(e) => setusername(e.target.value)}
             type="text"
           />
-          <Input
+          {/* <Input
             variant="standard"
             label="Password"
             color="white"
@@ -71,15 +75,19 @@ export default function Login() {
             value={teamLead}
             onChange={(e) => setteamLead(e.target.value)}
             type="text"
-          />
+          /> */}
         </div>
-        <p className="text">Welcome to wisperNet kindly login</p>
+        {loading ? (
+          <p>wait while we log you in</p>
+        ) : (
+          <p className="text">Welcome to wisperNet kindly login</p>
+        )}
         {/* <p className='text-lg'> </p> */}
       </div>
       <div className="flex  flex-col w-full bg-red grow">
         <div className="absolute w-full bg-red flex gap-2 p-2  bottom-2 left">
           <div
-            className={Bclass + "text-white shadow"} 
+            className={Bclass + "text-white shadow"}
             onClick={() => handleLogin()}>
             LOGIN
           </div>

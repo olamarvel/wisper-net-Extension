@@ -17,11 +17,13 @@
     "@plasmohq/storage": "^1.6.1",
     "@sanity/client": "^6.1.3",
     "axios": "^1.4.0",
-    "plasmo": "^0.77.5",
+    "jsonwebtoken": "^9.0.1",
+    "plasmo": "^0.82.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "^6.12.1",
     "react-toastify": "^9.1.3",
+    "use-ackee": "^3.0.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

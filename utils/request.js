@@ -1,7 +1,7 @@
 import { error, notify } from "~utils"
 
-// const url = "https://wispernet.onrender.com"
-const url = "http://localhost:3000"
+const url = "https://wispernet-xoyp.onrender.com"
+// const url = "http://localhost:3000"
 // export const logi = async (data) => (await axios.post(url + "/user/login",data)).data
 export const login = async (data) => {
   try {
@@ -79,4 +79,11 @@ export const increaseAds = async (id, token) => {
     // console.error(error)
     error(err)
   }
-}
+} 
+
+
+
+
+
+
+// Easycares200

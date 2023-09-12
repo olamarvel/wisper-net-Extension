@@ -1,9 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities; 
 
 #click_container {
-  --tw-bg-opacity: 1;
+  /* --tw-bg-opacity: 1;
   background-color: #CC8899;
   /* width: 6rem; */
-  height: 2.5rem;
+  /* height: 2.5rem;
   padding:0.5rem;
   color: white;
   border-radius: 0.25rem;
@@ -11,5 +14,6 @@
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color),
     0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);  */
+  @apply bg-my-indigo h-fit p-2 text-white rounded shadow
 }
